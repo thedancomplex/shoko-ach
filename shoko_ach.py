@@ -3,6 +3,9 @@ import dynamixel
 import sys
 import numpy as np
 import time
+import os
+import yaml
+
 
 
 ref     = shoko.SHOKO_REF()
@@ -14,8 +17,9 @@ robot   = None
 
 def init(com = None, baud=None):
   global ref, state, param
+  com = None
   if(com == None):
-    com = '/dev/ttyUSB0'
+    com = 0
 
   if(baud == None):
     baud = 1000000
@@ -26,8 +30,8 @@ def init(com = None, baud=None):
     param.joint[i].offset    = 0.0
     param.joint[i].dir       = 1.0
     param.joint[i].torque    = 0.0045  # 4.5 mA per unit
-    param.joint[i].theta_max =  np.PI/2.0 # max theta in rad
-    param.joint[i].theta_min = -np.PI/2.0 # min theta in rad
+    param.joint[i].theta_max =  np.pi/2.0 # max theta in rad
+    param.joint[i].theta_min = -np.pi/2.0 # min theta in rad
     param.baud               = baud # baud rate
     param.com                = com  # com port     
 
@@ -61,16 +65,17 @@ def dynSetup():
     global param
 # Look for a settings.yaml file
     settingsFile = 'settings.yaml'
-    if not options.clean and os.path.exists(settingsFile):
+    if os.path.exists(settingsFile):
         with open(settingsFile, 'r') as fh:
             settings = yaml.load(fh)
     # If we were asked to bypass, or don't have settings
     else:
         settings = {}
-        settings['port'] = param.com
+        settings['port'] = '/dev/ttyUSB'+str(param.com)
         
         # Baud rate
         baudRate = param.baud
+        print "##### baud = ", baudRate
         settings['baudRate'] = baudRate
         
         # Servo ID

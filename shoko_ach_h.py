@@ -27,7 +27,7 @@
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from ctypes import Structure,c_uint16,c_double,c_ubyte,c_uint32,c_int16# */
+from ctypes import Structure,c_uint16,c_double,c_ubyte,c_uint32,c_int32,c_int16# */
 import ach
 
 
@@ -124,5 +124,5 @@ class SHOKO_PARAM(Structure):
   _pack_   = 1
   _fields_ = [
               ("joint", SHOKO_JOINT_PARAM*SHOKO_JOINT_COUNT),
-              ("baud"     , c_int16),  # baud rate
-              ("com"      , c_ubyte*SHOKO_CHAR_PARAM_BUFFER_SIZE)] # COM port with dir (/dev..)
+              ("baud"     , c_int32),  # baud rate
+              ("com"      , c_int16)] # COM port with dir (/dev..)
