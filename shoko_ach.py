@@ -137,3 +137,26 @@ def mainSetup(settings):
       print "...Done"
     
     robot = net
+
+
+def rad2enc(s_id, s_rad):
+  global param
+  return (s_rad + np.pi) * param.joint[s_id].ticks / (np.pi * 2.0)
+
+
+def setRef(s_id, s_rad):
+  global robot, param
+  enc = rad2enc(s_id, s_rad)
+  for actuator in robot.get_dynamixels():
+    print "act id = ", actuator.id
+    if (actuator.id == param.joint[s_id].id): 
+      actuator.moving_speed = 50
+      actuator.torque_enable = True
+      actuator.torque_limit = 800 
+      actuator.max_torque = 800
+      actuator.goal_position = int(enc)
+      print "set ref to: ", int(enc)
+
+def syncRef():
+  global robot
+  robot.synchronize()
