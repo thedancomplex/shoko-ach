@@ -159,8 +159,14 @@ def setRef(s_id, s_rad):
     if (actuator.id == param.joint[s_id].id): 
       actuator.moving_speed = 50
       actuator.torque_enable = True
-      actuator.torque_limit = 800 
-      actuator.max_torque = 800
+      #just for demo
+      if((actuator.id  == 11) | (actuator.id == 12) | (actuator.id == 13)):
+        actuator.torque_limit = 1 
+        actuator.max_torque = 1
+        print 'set min for id = ', actuator.id
+      else:
+        actuator.torque_limit = 800
+        actuator.max_torque = 800
       actuator.goal_position = int(enc)
   return
 
