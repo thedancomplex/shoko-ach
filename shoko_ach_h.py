@@ -30,6 +30,7 @@
 from ctypes import Structure,c_uint16,c_double,c_ubyte,c_uint32,c_int16# */
 import ach
 
+
 # Ach channels
 SHOKO_JOINT_COUNT         = 12
 SHOKO_CHAN_NAME_REF       = 'shoko-ref'
@@ -78,10 +79,10 @@ class SHOKO_JOINT_STATE(Structure):
               ("pos"    , c_double), # actuial position (rad)
               ("ref"    , c_double), # last commanded reference value (rad)
               ("vel"    , c_double), # angular velocity (rad/sec)
-              ("torque" , c_double), # torque on motor (Nm)
+              ("torque" , c_double), # torque on motor (A)
               ("temp"   , c_double), # Temperature (C)
               ("voltage", c_double), # System voltage (V) 
-              ("name"   , SHOKO_CHAR_PARAM_BUFFER_SIZE)] # Space for human readiable name
+              ("name"   , c_ubyte*SHOKO_CHAR_PARAM_BUFFER_SIZE)] # Space for human readiable name
 
 class SHOKO_POWER_MIN_MAX(Structure):
   _pack_ = 1
@@ -95,17 +96,33 @@ class SHOKO_POWER(Structure):
   _fields_ = [("voltage", SHOKO_POWER_MIN_MAX),
               ("current", SHOKO_POWER_MIN_MAX),
               ("temp"   , c_double), 
-              ("power"  , c_double),
-              ("time"   , c_double)]
+              ("power"  , c_double)]
 
 
 class SHOKO_STATE(Structure):
   _pack_   = 1
   _fields_ = [
               ("joint"   , SHOKO_JOINT_STATE*SHOKO_JOINT_COUNT),
-              ("power"   , SHOKO_POWER)
+              ("power"   , SHOKO_POWER),
+              ("time"   , c_double)]
 
 
 
 
+class SHOKO_JOINT_PARAM(Structure):
+  _pack_   = 1
+  _fields_ = [
+              ("id"       , c_int16),  # ID of the servo
+              ("ticks"    , c_int16),  # encoder ticks per rev
+              ("offset"   , c_double), # offset from center (rad)
+              ("dir"      , c_double), # direction +-1 
+              ("toque"    , c_double), # torque conversion (A / unit)
+              ("theta_max", c_double), # max theta (rad)
+              ("theta_min", c_double)] # min theta (rad)
 
+class SHOKO_PARAM(Structure):
+  _pack_   = 1
+  _fields_ = [
+              ("joint", SHOKO_JOINT_PARAM*SHOKO_JOINT_COUNT),
+              ("baud"     , c_int16),  # baud rate
+              ("com"      , c_ubyte*SHOKO_CHAR_PARAM_BUFFER_SIZE)] # COM port with dir (/dev..)
