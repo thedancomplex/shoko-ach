@@ -5,7 +5,7 @@ import numpy as np
 import time
 import os
 import yaml
-
+import time
 
 
 ref     = shoko.SHOKO_REF()
@@ -143,20 +143,36 @@ def rad2enc(s_id, s_rad):
   global param
   return (s_rad + np.pi) * param.joint[s_id].ticks / (np.pi * 2.0)
 
+def enc2rad(s_id, s_enc):
+  global param
+  return s_enc * (2.0 * np.pi) / param.joint[s_id].ticks - np.pi
 
 def setRef(s_id, s_rad):
   global robot, param
   enc = rad2enc(s_id, s_rad)
   for actuator in robot.get_dynamixels():
-    print "act id = ", actuator.id
     if (actuator.id == param.joint[s_id].id): 
       actuator.moving_speed = 50
       actuator.torque_enable = True
       actuator.torque_limit = 800 
       actuator.max_torque = 800
       actuator.goal_position = int(enc)
-      print "set ref to: ", int(enc)
+  return
 
 def syncRef():
   global robot
   robot.synchronize()
+  return
+
+def getEnc(s_id):
+  global robot
+  for actuator in robot.get_dynamixels():
+    if (actuator.id == param.joint[s_id].id): 
+      actuator.read_all()
+      return enc2rad(s_id, actuator.current_position)
+  return None
+
+
+
+
+
