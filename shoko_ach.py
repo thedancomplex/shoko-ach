@@ -6,7 +6,7 @@ import time
 import os
 import yaml
 import time
-
+import ach
 
 ref     = shoko.SHOKO_REF()
 state   = shoko.SHOKO_STATE()
@@ -14,6 +14,11 @@ param   = shoko.SHOKO_PARAM()
 
 robot   = None
 
+ref_chan = ach.Channel(shoko.SHOKO_CHAN_NAME_REF)
+state_chan = ach.Channel(shoko.SHOKO_CHAN_NAME_STATE)
+
+ref_chan.flush()
+state_chan.flush()
 
 def init(com = None, baud=None):
   global ref, state, param
@@ -172,7 +177,13 @@ def getEnc(s_id):
       return enc2rad(s_id, actuator.current_position)
   return None
 
+def getRefData():
+  # get ref data from ach channel
+  global ref
+  [status, framesize] = ref_chan.get(ref, wait=False, last=True)
 
-
-
+def setStateData():
+  # set state data to ach channel
+  global state
+  state_chan.put(state)
 

@@ -12,7 +12,7 @@ if __name__ == '__main__':
   while(not end):
     tick = time.time()
     # Get new Ach Ref message
-    # TODO
+    shoko.getRefData()
 
     # Set References 
     for i in range(shoko.shoko.SHOKO_JOINT_COUNT):  shoko.setRef(i,shoko.ref.joint[i].ref)
@@ -34,7 +34,9 @@ if __name__ == '__main__':
 
 
     # Put new Ach State message
-    # TODO
+    shoko.setStateData()
+
+
     print "dt = ", (tock - tick)
 
     time.sleep(T)
