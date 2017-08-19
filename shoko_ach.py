@@ -179,11 +179,20 @@ def getEnc(s_id):
 
 def getRefData():
   # get ref data from ach channel
-  global ref
+  global ref, ref_chan
   [status, framesize] = ref_chan.get(ref, wait=False, last=True)
+  return ref
 
 def setStateData():
   # set state data to ach channel
-  global state
+  global state, state_chan
   state_chan.put(state)
 
+def getState():
+  global state
+  [status, framesize] = state_chan.get(state, wait=False, last=True)
+  return state
+
+def setRefData():
+  global ref, ref_chan
+  ref_chan.put(ref)
