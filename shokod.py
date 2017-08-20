@@ -36,8 +36,10 @@ if __name__ == '__main__':
     # Put new Ach State message
     shoko.setStateData()
 
-
-    print "dt = ", (tock - tick)
-
+    if( ii > 10):
+      print "dt = ", (tock - tick)
+      ii = 0
+    else:
+      ii += 1
     time.sleep(T)
   

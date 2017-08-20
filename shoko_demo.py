@@ -13,6 +13,7 @@ if __name__ == '__main__':
     # set all xSP
     xSP = state.joint[shoko.shoko.RSP].pos
 
+    shoko.ref.joint[shoko.shoko.RSP].ref = xSP
     shoko.ref.joint[shoko.shoko.LSP].ref = xSP
     shoko.ref.joint[shoko.shoko.LHP].ref = xSP
     shoko.ref.joint[shoko.shoko.RHP].ref = xSP
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     # set all xSY
     xSY = state.joint[shoko.shoko.RSY].pos
 
+    shoko.ref.joint[shoko.shoko.RSY].ref = xSY
     shoko.ref.joint[shoko.shoko.LSY].ref = xSY
     shoko.ref.joint[shoko.shoko.LHY].ref = xSY
     shoko.ref.joint[shoko.shoko.RHY].ref = xSY
@@ -29,6 +31,7 @@ if __name__ == '__main__':
     # set all xEP
     xEP = state.joint[shoko.shoko.REP].pos
 
+    shoko.ref.joint[shoko.shoko.REP].ref = xEP
     shoko.ref.joint[shoko.shoko.LEP].ref = xEP
     shoko.ref.joint[shoko.shoko.LKP].ref = xEP
     shoko.ref.joint[shoko.shoko.RKP].ref = xEP
