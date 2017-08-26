@@ -5,8 +5,8 @@ import time
 
 
 if __name__ == '__main__':
-
-	pos = np.array()
+	state = shoko.getState()
+	pos = np.zeros((4,3))
 	#store current position of leg1 joints
 	pos[0,0] = state.joint[shoko.shoko.RSY].pos
   	pos[0,1] = state.joint[shoko.shoko.RSP].pos
@@ -22,26 +22,25 @@ if __name__ == '__main__':
   	pos[2,1] = state.joint[shoko.shoko.LHP].pos
   	pos[2,2] = state.joint[shoko.shoko.LKP].pos
 
-`	#store current position of leg4 joints
+	#store current position of leg4 joints
 	pos[3,0] = state.joint[shoko.shoko.RHY].pos
   	pos[3,1] = state.joint[shoko.shoko.RHP].pos
   	pos[3,2] = state.joint[shoko.shoko.RKP].pos
 	
 	#joint position at end 
-  	goal = np.zeros(4,3)
+  	goal = np.zeros((4,3))
   	
-  	n = 10 #number of iterations to goal
+  	L = 10 #number of iterations to goal
   	
-  	delta = np.arry()
+  	delta = np.zeros((4,3))
   	#calculate delta angle for each joint per iteration n
-  	for n in range(0,4):
-  		for m in range(0,3):
-  			delta[n,m] = (goal[n,m] - pos[n,m])/n
+  	for n in range(4):
+  		for m in range(3):
+  			delta[n,m] = (goal[n,m] - pos[n,m])/float(L)
 
   	T = 0.01
 	
 	for x in range(0,n):
-		
 		for n in range(0,4):
 			for m in range(0,3):
 				pos[n,m] = pos[n,m] + delta[n,m]
@@ -64,7 +63,7 @@ if __name__ == '__main__':
     	shoko.ref.joint[shoko.shoko.RKP].ref = pos[3,2]
     	
 		
-  		time.sleep(T)
+  	time.sleep(T)
   	
   	shoko.ref.joint[shoko.shoko.RSY].ref = goal[0,0]
 	shoko.ref.joint[shoko.shoko.RSP].ref = goal[0,1]
@@ -72,15 +71,16 @@ if __name__ == '__main__':
 		
 	shoko.ref.joint[shoko.shoko.LSY].ref = goal[1,0]
 	shoko.ref.joint[shoko.shoko.LSP].ref = goal[1,1]
-    shoko.ref.joint[shoko.shoko.LEP].ref = goal[1,2]
+    	shoko.ref.joint[shoko.shoko.LEP].ref = goal[1,2]
     	
-    shoko.ref.joint[shoko.shoko.LHY].ref = goal[2,0]
-    shoko.ref.joint[shoko.shoko.LHP].ref = goal[2,1]
-    shoko.ref.joint[shoko.shoko.LKP].ref = goal[2,2]
+    	shoko.ref.joint[shoko.shoko.LHY].ref = goal[2,0]
+    	shoko.ref.joint[shoko.shoko.LHP].ref = goal[2,1]
+    	shoko.ref.joint[shoko.shoko.LKP].ref = goal[2,2]
 
-    shoko.ref.joint[shoko.shoko.RHY].ref = goal[3,0]
-    shoko.ref.joint[shoko.shoko.RHP].ref = goal[3,1]
-    shoko.ref.joint[shoko.shoko.RKP].ref = goal[3,2]
-  		
+    	shoko.ref.joint[shoko.shoko.RHY].ref = goal[3,0]
+    	shoko.ref.joint[shoko.shoko.RHP].ref = goal[3,1]
+    	shoko.ref.joint[shoko.shoko.RKP].ref = goal[3,2]
+
+	shoko.setRefData()  		
   	
   	
