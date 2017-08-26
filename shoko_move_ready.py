@@ -29,6 +29,8 @@ if __name__ == '__main__':
 	
 	#joint position at end 
   	goal = np.zeros((4,3))
+  	goal[:,1] = 0.3
+  	goal[:,2] = -0.7
   	
   	L = 10 #number of iterations to goal
   	
