@@ -20,6 +20,13 @@ state_chan = ach.Channel(shoko.SHOKO_CHAN_NAME_STATE)
 ref_chan.flush()
 state_chan.flush()
 
+def start():
+  global ref, state
+  state = getState()
+  ref = getRefData()
+  time.sleep(1.0)
+  return
+
 def init(com = None, baud=None):
   global ref, state, param
   com = None

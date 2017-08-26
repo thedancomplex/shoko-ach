@@ -5,7 +5,6 @@ import time
 
 
 if __name__ == '__main__':
-	shoko.start()
 	state = shoko.getState()
 	pos = np.zeros((4,3))
 	#store current position of leg1 joints
@@ -30,45 +29,43 @@ if __name__ == '__main__':
 	
 	#joint position at end 
   	goal = np.zeros((4,3))
+  	goal[:,1] = 0.630
+  	goal[:,2] = -0.546
   	
   	L = 10 #number of iterations to goal
-
-	print "goal"
-	print goal
-	print "pos"
-	print pos  	
+  	
   	delta = np.zeros((4,3))
   	#calculate delta angle for each joint per iteration n
   	for n in range(4):
   		for m in range(3):
-  			delta[n,m] = (float(goal[n,m]) - float(pos[n,m]))/float(L)
-        print delta
-  	T = 1.5
-	
-	for x in range(L):
-          for n in range(0,4):
-            for m in range(0,3):
-              pos[n,m] = pos[n,m] + delta[n,m]
-	
-          shoko.ref.joint[shoko.shoko.RSY].ref = pos[0,0]
-          shoko.ref.joint[shoko.shoko.RSP].ref = pos[0,1]
-          shoko.ref.joint[shoko.shoko.REP].ref = pos[0,2]
-		
-          shoko.ref.joint[shoko.shoko.LSY].ref = pos[1,0]
-          shoko.ref.joint[shoko.shoko.LSP].ref = pos[1,1]
-          shoko.ref.joint[shoko.shoko.LEP].ref = pos[1,2]
-    	
-          shoko.ref.joint[shoko.shoko.LHY].ref = pos[2,0]
-          shoko.ref.joint[shoko.shoko.LHP].ref = pos[2,1]
-          shoko.ref.joint[shoko.shoko.LKP].ref = pos[2,2]
+  			delta[n,m] = (goal[n,m] - pos[n,m])/float(L)
 
-          shoko.ref.joint[shoko.shoko.RHY].ref = pos[3,0]
-          shoko.ref.joint[shoko.shoko.RHP].ref = pos[3,1]
-          shoko.ref.joint[shoko.shoko.RKP].ref = pos[3,2]
+  	T = 0.01
+	
+	for x in range(0,n):
+		for n in range(0,4):
+			for m in range(0,3):
+				pos[n,m] = pos[n,m] + delta[n,m]
+	
+	
+		shoko.ref.joint[shoko.shoko.RSY].ref = pos[0,0]
+		shoko.ref.joint[shoko.shoko.RSP].ref = pos[0,1]
+		shoko.ref.joint[shoko.shoko.REP].ref = pos[0,2]
+		
+		shoko.ref.joint[shoko.shoko.LSY].ref = pos[1,0]
+                shoko.ref.joint[shoko.shoko.LSP].ref = pos[1,1]
+    	        shoko.ref.joint[shoko.shoko.LEP].ref = pos[1,2]
     	
-          shoko.setRefData()
-          print " i = ", x, " REP = ", pos[0,2]
-          time.sleep(T)
+    	        shoko.ref.joint[shoko.shoko.LHY].ref = pos[2,0]
+    	        shoko.ref.joint[shoko.shoko.LHP].ref = pos[2,1]
+    	        shoko.ref.joint[shoko.shoko.LKP].ref = pos[2,2]
+
+    	        shoko.ref.joint[shoko.shoko.RHY].ref = pos[3,0]
+    	        shoko.ref.joint[shoko.shoko.RHP].ref = pos[3,1]
+    	        shoko.ref.joint[shoko.shoko.RKP].ref = pos[3,2]
+    	
+    	        shoko.setRefData()
+    	        time.sleep(T)
     	 
     	#end for loop 
     	
