@@ -12,6 +12,9 @@ if __name__ == '__main__':
 
     # set all xSP
     xSP = state.joint[shoko.shoko.RSP].pos
+    shoko.ref.joint[shoko.shoko.RSP].mode = shoko.shoko.SHOKO_REF_MODE_NO_TORQUE
+    shoko.ref.joint[shoko.shoko.RSY].mode = shoko.shoko.SHOKO_REF_MODE_NO_TORQUE
+    shoko.ref.joint[shoko.shoko.REP].mode = shoko.shoko.SHOKO_REF_MODE_NO_TORQUE
 
     shoko.ref.joint[shoko.shoko.RSP].ref = xSP
     shoko.ref.joint[shoko.shoko.LSP].ref = xSP

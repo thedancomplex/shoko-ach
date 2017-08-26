@@ -14,9 +14,11 @@ if __name__ == '__main__':
     # Get new Ach Ref message
     shoko.getRefData()
 
-    # Set References 
-    for i in range(shoko.shoko.SHOKO_JOINT_COUNT):  shoko.setRef(i,shoko.ref.joint[i].ref)
-
+    # Set References
+    try: 
+      for i in range(shoko.shoko.SHOKO_JOINT_COUNT):  shoko.setRef(i,shoko.ref.joint[i].ref)
+    except: 
+      print "error in setRef()"
     # Send References
     shoko.syncRef()
 

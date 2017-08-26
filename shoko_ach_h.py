@@ -54,7 +54,7 @@ SHOKO_CHAR_PARAM_BUFFER_SIZE = 30
 
 # Modes
 SHOKO_REF_MODE_FILTER   = 0 # reference to reference filter
-
+SHOKO_REF_MODE_NO_TORQUE = 1 # no torque mode
 
 
 # Make Reference Structure

@@ -59,6 +59,13 @@ def init(com = None, baud=None):
 
   dynSetup()
 
+def torque2Bit(t):
+  tt = t * 800.0
+  if (tt > 800): tt = int(800)
+  elif (tt < 0): tt = int(0)
+  else: tt = int(tt)
+  return tt
+
 def getMaxID(p):
   r = 0
   for i in range(shoko.SHOKO_JOINT_COUNT):
@@ -153,20 +160,17 @@ def enc2rad(s_id, s_enc):
   return s_enc * (2.0 * np.pi) / param.joint[s_id].ticks - np.pi
 
 def setRef(s_id, s_rad):
-  global robot, param
+  global robot, param, ref
   enc = rad2enc(s_id, s_rad)
   for actuator in robot.get_dynamixels():
     if (actuator.id == param.joint[s_id].id): 
       actuator.moving_speed = 25
       #actuator.torque_enable = True
       #just for demo
-      if((actuator.id  == 11) | (actuator.id == 12) | (actuator.id == 13)):
-        actuator.torque_limit = 0 
-        actuator.max_torque = 0
-#        print 'set min for id = ', actuator.id
-      else:
-        actuator.torque_limit = 800
-        actuator.max_torque = 800
+      torque = 800
+      if(ref.joint[s_id].mode == shoko.SHOKO_REF_MODE_NO_TORQUE): torque = 0
+      actuator.torque_limit = torque
+      actuator.max_torque = torque
       actuator.goal_position = int(enc)
   return
 
