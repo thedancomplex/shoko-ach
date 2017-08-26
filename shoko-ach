@@ -53,6 +53,7 @@ KillSim()
 Kill()
 {
   echo ' '
+  screen -S shokod -p 0 -X quit
 }
 
 Remote()
@@ -113,8 +114,19 @@ Start()
 
   DAEMON_ARGS=''
 
-  nohup python $SHOKO_PYTHON_DIR/shokod.py >> /dev/null #& echo $! >> $MDS_HOME_DIR/$MDS_PID_FILE
+#  nohup python $SHOKO_PYTHON_DIR/shokod.py >> /dev/null #& echo $! >> $MDS_HOME_DIR/$MDS_PID_FILE
 #  screen -S mdsik -d -m mds_ik_module.py
+
+  echo 'Starting shokod process...'
+	   sudo chmod 777 /dev/ttyACM*
+	   sudo chmod 777 /dev/ttyUSB*
+	   screen -S shokod -d -m python shokod.py
+           sleep 5
+           if ! screen -list | grep -q "shokod"; then
+                echo 'shokod started: FAIL'
+           else
+    		echo 'shokod started: success'
+           fi
 }
 
 SetFlags()

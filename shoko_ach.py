@@ -94,7 +94,7 @@ def dynSetup():
         # This usually requires a USB2Dynamixel
         serial = dynamixel.SerialStream(port=settings['port'],
                                         baudrate=settings['baudRate'],
-                                        timeout=0.01)
+                                        timeout=0.02)
         # Instantiate our network object
         net = dynamixel.DynamixelNetwork(serial)
         
@@ -126,7 +126,7 @@ def mainSetup(settings):
     global robot
     # Establish a serial connection to the dynamixel network.
     # This usually requires a USB2Dynamixel
-    serial = dynamixel.SerialStream(port=settings['port'], baudrate=settings['baudRate'], timeout=0.01)
+    serial = dynamixel.SerialStream(port=settings['port'], baudrate=settings['baudRate'], timeout=0.02)
     # Instantiate our network object
     net = dynamixel.DynamixelNetwork(serial)
 
