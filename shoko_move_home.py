@@ -51,19 +51,19 @@ if __name__ == '__main__':
 		shoko.ref.joint[shoko.shoko.REP].ref = pos[0,2]
 		
 		shoko.ref.joint[shoko.shoko.LSY].ref = pos[1,0]
-    	shoko.ref.joint[shoko.shoko.LSP].ref = pos[1,1]
-    	shoko.ref.joint[shoko.shoko.LEP].ref = pos[1,2]
+       		shoko.ref.joint[shoko.shoko.LSP].ref = pos[1,1]
+    		shoko.ref.joint[shoko.shoko.LEP].ref = pos[1,2]
     	
-    	shoko.ref.joint[shoko.shoko.LHY].ref = pos[2,0]
-    	shoko.ref.joint[shoko.shoko.LHP].ref = pos[2,1]
-    	shoko.ref.joint[shoko.shoko.LKP].ref = pos[2,2]
+    		shoko.ref.joint[shoko.shoko.LHY].ref = pos[2,0]
+    		shoko.ref.joint[shoko.shoko.LHP].ref = pos[2,1]
+    		shoko.ref.joint[shoko.shoko.LKP].ref = pos[2,2]
 
-    	shoko.ref.joint[shoko.shoko.RHY].ref = pos[3,0]
-    	shoko.ref.joint[shoko.shoko.RHP].ref = pos[3,1]
-    	shoko.ref.joint[shoko.shoko.RKP].ref = pos[3,2]
+    		shoko.ref.joint[shoko.shoko.RHY].ref = pos[3,0]
+    		shoko.ref.joint[shoko.shoko.RHP].ref = pos[3,1]
+    		shoko.ref.joint[shoko.shoko.RKP].ref = pos[3,2]
     	
-    	shoko.setRefData()
-    	time.sleep(T)
+    		shoko.setRefData()
+    		time.sleep(T)
     	 
     	#end for loop 
     	
@@ -73,15 +73,15 @@ if __name__ == '__main__':
 		
 	shoko.ref.joint[shoko.shoko.LSY].ref = goal[1,0]
 	shoko.ref.joint[shoko.shoko.LSP].ref = goal[1,1]
-    shoko.ref.joint[shoko.shoko.LEP].ref = goal[1,2]
+        shoko.ref.joint[shoko.shoko.LEP].ref = goal[1,2]
     	
-    shoko.ref.joint[shoko.shoko.LHY].ref = goal[2,0]
-    shoko.ref.joint[shoko.shoko.LHP].ref = goal[2,1]
-    shoko.ref.joint[shoko.shoko.LKP].ref = goal[2,2]
+        shoko.ref.joint[shoko.shoko.LHY].ref = goal[2,0]
+        shoko.ref.joint[shoko.shoko.LHP].ref = goal[2,1]
+        shoko.ref.joint[shoko.shoko.LKP].ref = goal[2,2]
 
-    shoko.ref.joint[shoko.shoko.RHY].ref = goal[3,0]
-    shoko.ref.joint[shoko.shoko.RHP].ref = goal[3,1]
-    shoko.ref.joint[shoko.shoko.RKP].ref = goal[3,2]
+        shoko.ref.joint[shoko.shoko.RHY].ref = goal[3,0]
+        shoko.ref.joint[shoko.shoko.RHP].ref = goal[3,1]
+        shoko.ref.joint[shoko.shoko.RKP].ref = goal[3,2]
 
 	shoko.setRefData()  		
   	
