@@ -16,5 +16,8 @@ screen -S shoko-ach-make -dm bash -c 'source /home/hubo/projects/shoko-ach/shoko
 
 screen -S shoko-ach-daemon -dm bash -c 'python /home/hubo/projects/shoko-ach/shokod.py' 
 
+su -c 'sh /home/hubo/projects/shoko-ach/shoko-roscore' - hubo & 
+su -c 'sh /home/hubo/projects/shoko-ach/shoko-imu' - hubo & 
 
 exit 0
+
