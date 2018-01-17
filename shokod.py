@@ -4,12 +4,18 @@ import time
 
 
 if __name__ == '__main__':
-  shoko.init()
-  
-  T = 0.01
-  end = False
-  ii = 0
-  while(not end):
+
+
+
+ while(True):
+  try:
+   shoko.init()
+
+   T = 0.01
+   end = False
+   ii = 0
+ 
+   while(not end):
     tick = time.time()
     # Get new Ach Ref message
     shoko.getRefData()
@@ -45,3 +51,5 @@ if __name__ == '__main__':
       ii += 1
     time.sleep(T)
   
+  except:
+      print "Shokod Failed - restarting"
