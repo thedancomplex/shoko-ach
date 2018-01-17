@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import shoko_ach as shoko
 import numpy as np
 import time
