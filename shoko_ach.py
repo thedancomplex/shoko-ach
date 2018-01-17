@@ -83,7 +83,7 @@ def getMaxID(p):
 def dynSetup():
     global param
 # Look for a settings.yaml file
-    settingsFile = 'settings.yaml'
+    settingsFile = '/home/hubo/projects/shoko-ach/settings.yaml'
     if os.path.exists(settingsFile):
         with open(settingsFile, 'r') as fh:
             settings = yaml.load(fh)

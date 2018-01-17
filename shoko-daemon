@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo su - hubo
+screen -S shoko-ach-daemon -dm bash -c 'python /home/hubo/projects/shoko-ach/shokod.py'
