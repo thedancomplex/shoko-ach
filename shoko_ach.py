@@ -55,14 +55,14 @@ def init(com = None, baud=None):
   param.joint[shoko.LSP].id = 22
   param.joint[shoko.LEP].id = 23
 
-  param.joint[shoko.RHY].id = 41
-  param.joint[shoko.RHP].id = 42
-  param.joint[shoko.RKP].id = 43
+  param.joint[shoko.RHY].id = 31
+  param.joint[shoko.RHP].id = 32
+  param.joint[shoko.RKP].id = 33
 
 
-  param.joint[shoko.LHY].id = 31
-  param.joint[shoko.LHP].id = 32
-  param.joint[shoko.LKP].id = 33
+  param.joint[shoko.LHY].id = 41
+  param.joint[shoko.LHP].id = 42
+  param.joint[shoko.LKP].id = 43
 
   dynSetup()
 

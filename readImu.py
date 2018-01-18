@@ -29,9 +29,9 @@ def readImu():
         x = float(sp[1])
         y = float(sp[2])
         z = float(sp[3])
-        imu.orientation.x = x * np.pi/180.0
+        imu.orientation.x = z * np.pi/180.0
         imu.orientation.y = y * np.pi/180.0
-        imu.orientation.z = z * np.pi/180.0
+        imu.orientation.z = x * np.pi/180.0
         imu_pub.publish(imu)
         if (i >= 100):
       	  print 'x = ',x,'  y = ', y,'  z = ', z

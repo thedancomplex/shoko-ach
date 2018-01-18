@@ -53,21 +53,21 @@ def AquaToShokoRef(aqua,shoko):
 def RosToShokoRef(ros,shoko):
   shoko.getRefData()
 
-  shoko.ref.joint[shoko.shoko.RSY].ref = ros[0]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.RSP].ref = ros[1]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.REP].ref = ros[2]  * np.pi/180.0
+  shoko.ref.joint[shoko.shoko.RSY].ref = ros[0]  * np.pi/180.0 *  1.0
+  shoko.ref.joint[shoko.shoko.RSP].ref = ros[1]  * np.pi/180.0 * -1.0
+  shoko.ref.joint[shoko.shoko.REP].ref = ros[2]  * np.pi/180.0 *  1.0
 
-  shoko.ref.joint[shoko.shoko.LSY].ref = ros[3]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.LSP].ref = ros[4]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.LEP].ref = ros[5]  * np.pi/180.0
+  shoko.ref.joint[shoko.shoko.LSY].ref = ros[3]  * np.pi/180.0 *  1.0
+  shoko.ref.joint[shoko.shoko.LSP].ref = ros[4]  * np.pi/180.0 * -1.0
+  shoko.ref.joint[shoko.shoko.LEP].ref = ros[5]  * np.pi/180.0 *  1.0
 
-  shoko.ref.joint[shoko.shoko.RHY].ref = ros[6]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.RHP].ref = ros[7]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.RKP].ref = ros[8]  * np.pi/180.0
+  shoko.ref.joint[shoko.shoko.RHY].ref = ros[6]  * np.pi/180.0 *  1.0
+  shoko.ref.joint[shoko.shoko.RHP].ref = ros[7]  * np.pi/180.0 * -1.0
+  shoko.ref.joint[shoko.shoko.RKP].ref = ros[8]  * np.pi/180.0 *  1.0
 
-  shoko.ref.joint[shoko.shoko.LHY].ref = ros[9]  * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.LHP].ref = ros[10] * np.pi/180.0
-  shoko.ref.joint[shoko.shoko.LKP].ref = ros[11] * np.pi/180.0
+  shoko.ref.joint[shoko.shoko.LHY].ref = ros[9]  * np.pi/180.0 *  1.0
+  shoko.ref.joint[shoko.shoko.LHP].ref = ros[10] * np.pi/180.0 * -1.0
+  shoko.ref.joint[shoko.shoko.LKP].ref = ros[11] * np.pi/180.0 *  1.0
   return shoko.setRefData()
 
 
