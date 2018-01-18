@@ -38,12 +38,15 @@
 
 import rospy
 import aquashoko
+import shoko_ach as shoko
 from std_msgs.msg import String
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Header
 # Only for Gazebo  ## from aquashoko_gazebo.cfg import AquashokoJointControlParamsConfig
 from dynamic_reconfigure.server import Server
 import copy
+import shoko_ach_to_aqua_shoko as s2s
+
 config_start = False
 yaw1_pid = aquashoko.AQUASHOKO_PID()
 pitch2_pid = aquashoko.AQUASHOKO_PID()
@@ -69,6 +72,7 @@ pitch3_pid.lowlim = -10.0
 
 def callback(data):
 #    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.name)
+    ref = shoko.getRefData()
     aquashoko.aquashoko_set(0,0,data.position[0])
     aquashoko.aquashoko_set(0,1,data.position[1])
     aquashoko.aquashoko_set(0,2,data.position[2])
@@ -82,7 +86,11 @@ def callback(data):
     aquashoko.aquashoko_set(3,1,data.position[10])
     aquashoko.aquashoko_set(3,2,data.position[11])
     aquashoko.aquashoko_put()
-
+    s2s.RosToShokoRef(data.position,shoko)
+    print "Puslished New Message"
+    print "Position from ros"
+    for i in range(12):
+      print data.position[i]
 def listener():
     global yaw1_pid, pitch2_pid, pitch3_pid
     aquashoko.aquashoko_init()
@@ -195,4 +203,8 @@ def cfg_callback(config, level):
         return config
 
 if __name__ == '__main__':
-    listener()
+  while(True):
+    try:
+      listener()
+    except:
+      print "ros listener failed"

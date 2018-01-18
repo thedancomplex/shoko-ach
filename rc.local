@@ -17,6 +17,7 @@ screen -S shoko-ach-make -dm bash -c 'source /home/hubo/projects/shoko-ach/shoko
 su -c 'sh /home/hubo/projects/shoko-ach/shoko-daemon' - hubo & 
 su -c 'sh /home/hubo/projects/shoko-ach/shoko-roscore' - hubo & 
 su -c 'sh /home/hubo/projects/shoko-ach/shoko-imu' - hubo & 
+su -c 'sh /home/hubo/projects/shoko-ach/shoko-daemon-ros' - hubo & 
 
 exit 0
 
